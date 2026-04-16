@@ -1022,7 +1022,7 @@ h1 {
 
 @media (max-width: 480px) {
     :root {
-        --board-size: min(92vw, 92vmin);
+        --board-size: min(86vw, 92vmin);
     }
 
     body {
@@ -1031,7 +1031,7 @@ h1 {
 
     .dashboard {
         gap: 5px;
-        padding: 6px 4px 10px;
+        padding: 6px 10px 10px;
         width: 100%;
     }
 
@@ -1175,6 +1175,19 @@ h1 {
     .start-mode-buttons {
         flex-direction: column;
         align-items: center;
+    }
+
+    /* Reorder: board first, graveyards below */
+    .game-container {
+        order: 1;
+    }
+
+    .dashboard>.graveyard:first-child {
+        order: 2;
+    }
+
+    .dashboard>.graveyard:last-child {
+        order: 3;
     }
 }
 
