@@ -229,6 +229,10 @@ document.addEventListener('DOMContentLoaded', () => {
             square.id = `square-${row}-${col}`;
             square.innerHTML = getPieceHTML(board[row][col]);
 
+            if (playerColor === 'black') {
+                square.querySelector('img')?.style.setProperty('transform', 'rotate(180deg)');
+            }
+
             const img = square.querySelector('img');
             if (img) enableDragOnPiece(img, row, col);
 
@@ -945,6 +949,7 @@ function restartGame() {
 
     updateGraveyards();
     renderMoveHistory();
+    applyBoardOrientation();
 
     const statusEl = document.getElementById('status-display');
     if (statusEl) {
@@ -975,6 +980,7 @@ function startGame(mode, color = 'white') {
 
     startClock();
     updateTimerDisplay();
+    applyBoardOrientation();
 
     // If player picked Black, the computer (White) must move first!
     if (gameMode === 'computer' && playerColor === 'black') {
@@ -982,6 +988,34 @@ function startGame(mode, color = 'white') {
     }
 }
 
+function applyBoardOrientation() {
+    const chessboard = document.getElementById('chessboard');
+    const boardWrapper = document.querySelector('.board-wrapper');
+    const rankLabels = document.querySelector('.rank-labels');
+    const fileLabels = document.querySelector('.file-labels');
+
+    if (playerColor === 'black') {
+        // Flip the entire board view
+        chessboard.style.transform = 'rotate(180deg)';
+        boardWrapper.style.transform = 'rotate(180deg)';
+        // Counter-rotate the labels to keep them readable
+        if (rankLabels) rankLabels.style.transform = 'rotate(180deg)';
+        if (fileLabels) fileLabels.style.transform = 'rotate(180deg)';
+        // Also flip each piece so they aren't upside-down
+        document.querySelectorAll('.square img').forEach(img => {
+            img.style.transform = 'rotate(180deg)';
+        });
+    } else {
+        // White or 2-player — normal orientation
+        chessboard.style.transform = '';
+        boardWrapper.style.transform = '';
+        if (rankLabels) rankLabels.style.transform = '';
+        if (fileLabels) fileLabels.style.transform = '';
+        document.querySelectorAll('.square img').forEach(img => {
+            img.style.transform = '';
+        });
+    }
+}
 
 
 // ============================================================

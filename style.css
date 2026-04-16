@@ -1022,68 +1022,88 @@ h1 {
 
 @media (max-width: 480px) {
     :root {
-        --board-size: min(94vw, 94vmin);
+        --board-size: min(92vw, 92vmin);
     }
 
-    .promotion-options {
-        gap: 10px;
-    }
-
-    .promotion-btn {
-        width: 64px;
-        height: 64px;
-    }
-
-    .promotion-content {
-        padding: 28px 24px;
-    }
-
-    .new-game-btn {
-        padding: 12px 20px;
-        font-size: 0.8rem;
-    }
-
-    .player-timer {
-        padding: 10px 14px;
-        font-size: 0.78rem;
-    }
-
-    .square img {
-        width: 88%;
-        height: 88%;
-    }
-
-    .start-btn {
-        padding: 14px 36px;
-        font-size: 0.9rem;
-    }
-
-    .start-mode-buttons {
-        flex-direction: column;
-        align-items: center;
-    }
-}
-
-@media (max-height: 720px) {
-    :root {
-        --board-size: min(540px, calc(100vw - 310px), calc(100vh - 140px));
+    h1 {
+        display: none;
     }
 
     .move-history-panel {
         display: none;
     }
 
-    .dashboard {
-        padding: 10px 16px;
-        gap: 20px;
+    .top-bar {
+        gap: 4px;
+        flex-wrap: wrap;
+        justify-content: center;
     }
 
-    .game-container {
+    .player-timer {
+        padding: 5px 10px;
+        font-size: 0.70rem;
+        flex: 1;
+        text-align: center;
+    }
+
+    .status-banner {
+        padding: 5px 12px;
+        font-size: 0.70rem;
+        width: 100%;
+        text-align: center;
+    }
+
+    .new-game-btn {
+        padding: 5px 12px;
+        font-size: 0.68rem;
+    }
+
+    .graveyard {
+        width: 100%;
+        max-width: 96vw;
+        min-height: unset;
+        flex-direction: row;
+        align-items: center;
+        padding: 5px 10px;
         gap: 8px;
     }
 
-    h1 {
-        font-size: clamp(1rem, 2.5vw, 1.7rem);
+    .graveyard h2 {
+        font-size: 0.55rem;
+        padding-bottom: 0;
+        padding-right: 8px;
+        border-bottom: none;
+        border-right: 1px solid rgba(255, 215, 0, 0.20);
+        white-space: nowrap;
+    }
+
+    .captured-container img {
+        width: 22px;
+        height: 22px;
+    }
+
+    .square img {
+        width: 90%;
+        height: 90%;
+    }
+
+    .start-btn {
+        padding: 12px 32px;
+        font-size: 0.88rem;
+    }
+
+    .start-mode-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .dashboard {
+        gap: 6px;
+        padding: 8px 6px;
+    }
+
+    .game-container {
+        gap: 6px;
     }
 }
 
