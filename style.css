@@ -1027,50 +1027,106 @@ h1 {
 
     body {
         align-items: flex-start;
-        padding-top: 8px;
     }
 
+    .dashboard {
+        gap: 5px;
+        padding: 6px 4px 10px;
+        width: 100%;
+    }
+
+    .game-container {
+        gap: 5px;
+        width: 100%;
+    }
+
+    /* Title — back but compact */
     h1 {
-        display: none;
+        font-size: 1rem;
+        letter-spacing: 0.04em;
+        filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.25));
     }
 
+    /* Top bar — CSS Grid:
+       Row 1: [timer-white] [status] [timer-black]
+       Row 2: [new-game]   [empty]  [undo]        */
+    .top-bar {
+        display: grid;
+        grid-template-columns: 1fr 1.4fr 1fr;
+        grid-template-rows: auto auto;
+        gap: 4px 5px;
+        width: 100%;
+        flex-wrap: unset;
+        justify-content: unset;
+    }
+
+    #timer-white {
+        grid-column: 1;
+        grid-row: 1;
+        order: unset;
+        flex: unset;
+        text-align: center;
+        font-size: 0.66rem;
+        padding: 5px 4px;
+    }
+
+    #status-display {
+        grid-column: 2;
+        grid-row: 1;
+        order: unset;
+        width: auto;
+        font-size: 0.58rem;
+        padding: 5px 6px;
+        letter-spacing: 0.06em;
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    #timer-black {
+        grid-column: 3;
+        grid-row: 1;
+        order: unset;
+        flex: unset;
+        text-align: center;
+        font-size: 0.66rem;
+        padding: 5px 4px;
+    }
+
+    #new-game-btn {
+        grid-column: 1;
+        grid-row: 2;
+        order: unset;
+        font-size: 0.63rem;
+        padding: 5px 8px;
+        justify-self: stretch;
+        text-align: center;
+    }
+
+    #undo-btn {
+        grid-column: 3;
+        grid-row: 2;
+        order: unset;
+        font-size: 0.63rem;
+        padding: 5px 8px;
+        justify-self: stretch;
+        text-align: center;
+    }
+
+    /* Move History — hidden on mobile */
     .move-history-panel {
         display: none;
     }
 
-    .top-bar {
-        gap: 4px;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .player-timer {
-        padding: 5px 10px;
-        font-size: 0.70rem;
-        flex: 1;
-        text-align: center;
-    }
-
-    .status-banner {
-        padding: 5px 12px;
-        font-size: 0.70rem;
-        width: 100%;
-        text-align: center;
-    }
-
-    .new-game-btn {
-        padding: 5px 12px;
-        font-size: 0.68rem;
-    }
-
+    /* Graveyard strips — slim horizontal */
     .graveyard {
         width: 100%;
-        max-width: 96vw;
+        max-width: 100%;
         min-height: unset;
         flex-direction: row;
         align-items: center;
         padding: 5px 10px;
         gap: 8px;
+        border-radius: 8px;
     }
 
     .graveyard h2 {
@@ -1082,9 +1138,13 @@ h1 {
         white-space: nowrap;
     }
 
+    .captured-container {
+        justify-content: flex-start;
+    }
+
     .captured-container img {
-        width: 22px;
-        height: 22px;
+        width: 20px;
+        height: 20px;
     }
 
     .square img {
@@ -1092,6 +1152,21 @@ h1 {
         height: 90%;
     }
 
+    /* Promotion modal */
+    .promotion-options {
+        gap: 10px;
+    }
+
+    .promotion-btn {
+        width: 64px;
+        height: 64px;
+    }
+
+    .promotion-content {
+        padding: 28px 24px;
+    }
+
+    /* Start screen */
     .start-btn {
         padding: 12px 32px;
         font-size: 0.88rem;
@@ -1100,15 +1175,6 @@ h1 {
     .start-mode-buttons {
         flex-direction: column;
         align-items: center;
-    }
-
-    .dashboard {
-        gap: 6px;
-        padding: 8px 6px;
-    }
-
-    .game-container {
-        gap: 6px;
     }
 }
 
