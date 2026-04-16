@@ -1025,6 +1025,11 @@ h1 {
         --board-size: min(92vw, 92vmin);
     }
 
+    body {
+        align-items: flex-start;
+        padding-top: 8px;
+    }
+
     h1 {
         display: none;
     }

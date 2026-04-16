@@ -229,10 +229,6 @@ document.addEventListener('DOMContentLoaded', () => {
             square.id = `square-${row}-${col}`;
             square.innerHTML = getPieceHTML(board[row][col]);
 
-            if (playerColor === 'black') {
-                square.querySelector('img')?.style.setProperty('transform', 'rotate(180deg)');
-            }
-
             const img = square.querySelector('img');
             if (img) enableDragOnPiece(img, row, col);
 
@@ -990,30 +986,40 @@ function startGame(mode, color = 'white') {
 
 function applyBoardOrientation() {
     const chessboard = document.getElementById('chessboard');
-    const boardWrapper = document.querySelector('.board-wrapper');
     const rankLabels = document.querySelector('.rank-labels');
     const fileLabels = document.querySelector('.file-labels');
 
+    // Clear any old CSS rotation (from previous approach)
+    chessboard.style.transform = '';
+    document.querySelector('.board-wrapper').style.transform = '';
+    if (rankLabels) rankLabels.style.transform = '';
+    if (fileLabels) fileLabels.style.transform = '';
+    document.querySelectorAll('.square img').forEach(img => img.style.transform = '');
+
     if (playerColor === 'black') {
-        // Flip the entire board view
-        chessboard.style.transform = 'rotate(180deg)';
-        boardWrapper.style.transform = 'rotate(180deg)';
-        // Counter-rotate the labels to keep them readable
-        if (rankLabels) rankLabels.style.transform = 'rotate(180deg)';
-        if (fileLabels) fileLabels.style.transform = 'rotate(180deg)';
-        // Also flip each piece so they aren't upside-down
-        document.querySelectorAll('.square img').forEach(img => {
-            img.style.transform = 'rotate(180deg)';
-        });
+        // Reorder squares: row 7→0, col 7→0 (Black's view: Black pieces at bottom)
+        for (let row = 7; row >= 0; row--) {
+            for (let col = 7; col >= 0; col--) {
+                chessboard.appendChild(document.getElementById(`square-${row}-${col}`));
+            }
+        }
+        // Update labels for Black's perspective
+        if (rankLabels) rankLabels.innerHTML =
+            '<span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span>';
+        if (fileLabels) fileLabels.innerHTML =
+            '<span>h</span><span>g</span><span>f</span><span>e</span><span>d</span><span>c</span><span>b</span><span>a</span>';
     } else {
-        // White or 2-player — normal orientation
-        chessboard.style.transform = '';
-        boardWrapper.style.transform = '';
-        if (rankLabels) rankLabels.style.transform = '';
-        if (fileLabels) fileLabels.style.transform = '';
-        document.querySelectorAll('.square img').forEach(img => {
-            img.style.transform = '';
-        });
+        // Normal order: row 0→7, col 0→7 (White's view: White pieces at bottom)
+        for (let row = 0; row < 8; row++) {
+            for (let col = 0; col < 8; col++) {
+                chessboard.appendChild(document.getElementById(`square-${row}-${col}`));
+            }
+        }
+        // Reset labels
+        if (rankLabels) rankLabels.innerHTML =
+            '<span>8</span><span>7</span><span>6</span><span>5</span><span>4</span><span>3</span><span>2</span><span>1</span>';
+        if (fileLabels) fileLabels.innerHTML =
+            '<span>a</span><span>b</span><span>c</span><span>d</span><span>e</span><span>f</span><span>g</span><span>h</span>';
     }
 }
 
